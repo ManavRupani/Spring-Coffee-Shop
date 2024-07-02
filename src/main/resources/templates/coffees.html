@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- You can use any CSS framework or your custom styles here -->
+</head>
+<body>
+    <div class="container">
+        <h2>Coffee Menu</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Calories</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Thymeleaf iteration over coffee options -->
+                        <tr th:each="coffee : ${coffees}">
+                            <td th:text="${coffee.name}"></td>
+                            <td th:text="${coffee.size}"></td>
+                            <td th:text="${coffee.calories}"></td>
+                            <td th:text="${coffee.price}"></td>
+                            <td>
+                                <form th:action="@{/order}" method="post">
+                                    <input type="hidden" name="coffeeId" th:value="${coffee.id}">
+                                    <input type="number" name="quantity" value="1" min="1">
+                                    <button type="submit">Add to Cart</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
