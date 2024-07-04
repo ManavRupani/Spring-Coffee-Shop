@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tbl_user")
@@ -15,6 +16,9 @@ public class User {
     private String name;
     private String email;
     private String password;
+    @Transient
+    private String verifypassword;
+
     private String type;
 
     public Long getId() {
@@ -55,6 +59,18 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public String getVerifypassword() {
+        return verifypassword;
+    }
+
+    public void setVerifypassword(String verifypassword) {
+        this.verifypassword = verifypassword;
+    }
+    
+    public boolean isAdmin() {
+        return "admin".equalsIgnoreCase(this.type);
     }
     
 }
